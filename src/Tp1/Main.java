@@ -16,6 +16,9 @@ public class Main {
             System.out.println("4- afficher liste arc");
             System.out.println("5- supprimer noeud");
             System.out.println("6- finir");
+            System.out.println("7- graphe de test");
+            System.out.println("8- verif");
+            System.out.println("9- genere et test");
             Scanner sc = new Scanner(System.in);
             System.out.println("Veuillez saisir votre choix :");
             int value = sc.nextInt();
@@ -26,14 +29,12 @@ public class Main {
                     Sommet nouveau;
                     System.out.println("Veuillez saisir un nom :");
                     String nom = sc2.nextLine();
-                    System.out.println("Veuillez saisir une couleur :");
-                    String couleur = sc3.nextLine();
-                    graphe.ajouterSommet(nouveau = new Sommet(nom, couleur));
+                    graphe.ajouterSommet(nouveau = new Sommet(nom));
                     break;
 
                 case 2:
                     Arc nouveauArc;
-                    if(graphe.A.size()>=2) {
+                    if(graphe.G.size()>=2) {
                         Sommet noeud1 = graphe.selectionnerSommet();
                         Sommet noeud2 = graphe.selectionnerSommet();
                         graphe.A.add(nouveauArc = new Arc(noeud1, noeud2));
@@ -61,7 +62,32 @@ public class Main {
                     System.out.println("aurevoir");
                     break;
 
+                case 7:
+                    //sommet
+                    graphe.ajouterSommet(nouveau = new Sommet("S1"));
+                    graphe.ajouterSommet(nouveau = new Sommet("S2"));
+                    graphe.ajouterSommet(nouveau = new Sommet("S3"));
+                    //graphe.ajouterSommet(nouveau = new Sommet("S4"));
+                    //graphe.ajouterSommet(nouveau = new Sommet("S5", couleur));
+                    //graphe.ajouterSommet(nouveau = new Sommet("S6", couleur));
+                    //graphe.ajouterSommet(nouveau = new Sommet("S7", couleur));
+                    //graphe.ajouterSommet(nouveau = new Sommet("S8", couleur));
+                    //graphe.ajouterSommet(nouveau = new Sommet("S9", couleur));
+                    //graphe.ajouterSommet(nouveau = new Sommet("S10", couleur));
+                    System.out.println("graphe de test généré");
+                    break;
 
+                case 8 :
+                    if(graphe.verifierCertificat()){
+                        System.out.println("solution valide");
+                    }else{
+                        System.out.println("solution invalide");
+                    }
+                    break;
+
+                case 9 :
+                    graphe.genereEtTest();
+                    break;
                 default:
                     System.out.println("erreur");
             }
@@ -69,4 +95,6 @@ public class Main {
         }
 
     }
+
+
 }

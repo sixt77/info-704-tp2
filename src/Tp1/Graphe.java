@@ -43,14 +43,28 @@ public class Graphe {
         if(this.G.size() > 0) {
             System.out.println("liste des sommets : ");
             for(int i=0; i<this.G.size(); i++) {
-                if(this.G.get(i).nom.equals("noeud")){
-                    System.out.println(this.G.get(i).nom);
-                }
+                System.out.println(this.G.get(i).nom);
             }
         }else {
             System.out.println("liste vide");
         }
     }
+    public static void afficherListeSommet(Graphe G) {
+        if(G.G.size() > 0) {
+            System.out.println("liste des sommets : ");
+            for(int i=0; i<G.G.size(); i++) {
+                if(G.G.get(i).couleur != null){
+                    System.out.println("nom : "+G.G.get(i).nom+" couleur : "+G.G.get(i).couleur);
+                }else{
+                    System.out.println(G.G.get(i).nom);
+                }
+
+            }
+        }else {
+            System.out.println("liste vide");
+        }
+    }
+
 
     public void afficherListeArc() {
         if(this.A.size() > 0) {
@@ -100,5 +114,47 @@ public class Graphe {
                 this.G.remove(i);
             }
         }
+    }
+    public boolean verifierCertificat(){
+        boolean verif = true;
+        for(int i = 0; i < this.A.size(); i++){
+            if(this.A.get(i).S1.couleur.equals(this.A.get(i).S2.couleur)){
+                verif = false;
+            }
+        }
+        return verif;
+    }
+    public void genereEtTest(){
+        int nbPossible = puissance(3, this.G.size());
+        ArrayList<Graphe> grapheList = new ArrayList();
+        for(int i = 0; i < nbPossible; i++){
+            grapheList.add(this);
+            for(int j = 0; j < grapheList.get(i).G.size()-1; j++){
+                //cas classique
+                grapheList.get(i).G.get(j).changerCouleur(Integer.toString((i/(Math.round(puissance(3,this.G.size()-j-1)))%3)+1));
+            }
+            //dernier sommet
+
+            if((i + 1)% 3 == 0){
+                grapheList.get(i).G.get(grapheList.get(i).G.size()-1).changerCouleur(Integer.toString(3));
+            }else{
+                grapheList.get(i).G.get(grapheList.get(i).G.size()-1).changerCouleur(Integer.toString((i + 1)%3));
+            }
+            afficherListeSommet(grapheList.get(i));
+        }
+
+
+
+    }
+    public static int puissance(int v, int p){
+        int initial = v;
+        if(p != 0){
+            for(int i = 1; i < p; i++){
+                v = v * initial;
+            }
+        }else{
+            v = 0;
+        }
+        return v;
     }
 }

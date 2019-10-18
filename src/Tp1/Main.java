@@ -19,6 +19,7 @@ public class Main {
             System.out.println("7- graphe de test");
             System.out.println("8- verif");
             System.out.println("9- genere et test");
+            System.out.println("10- SBT");
             Scanner sc = new Scanner(System.in);
             System.out.println("Veuillez saisir votre choix :");
             int value = sc.nextInt();
@@ -67,13 +68,44 @@ public class Main {
                     Sommet S1 = new Sommet("S1");
                     Sommet S2 = new Sommet("S2");
                     Sommet S3 = new Sommet("S3");
-                    //sommet
+                    Sommet S4 = new Sommet("S4");
+                    Sommet S5 = new Sommet("S5");
+                    Sommet S6 = new Sommet("S6");
+                    Sommet S7 = new Sommet("S7");
+                    Sommet S8 = new Sommet("S8");
+                    Sommet S9 = new Sommet("S9");
+                    Sommet S10 = new Sommet("S10");
+
                     graphe.ajouterSommet(S1);
                     graphe.ajouterSommet(S2);
                     graphe.ajouterSommet(S3);
+                    graphe.ajouterSommet(S4);
+                    graphe.ajouterSommet(S5);
+                    graphe.ajouterSommet(S6);
+                    graphe.ajouterSommet(S7);
+                    graphe.ajouterSommet(S8);
+                    graphe.ajouterSommet(S9);
+                    graphe.ajouterSommet(S10);
+
                     //arc
                     graphe.ajouterArc(new Arc(S1, S2));
+                    graphe.ajouterArc(new Arc(S1, S4));
+                    graphe.ajouterArc(new Arc(S1, S6));
                     graphe.ajouterArc(new Arc(S2, S3));
+                    graphe.ajouterArc(new Arc(S2, S9));
+                    graphe.ajouterArc(new Arc(S3, S5));
+                    graphe.ajouterArc(new Arc(S3, S8));
+                    graphe.ajouterArc(new Arc(S4, S7));
+                    graphe.ajouterArc(new Arc(S4, S8));
+                    graphe.ajouterArc(new Arc(S5, S6));
+                    graphe.ajouterArc(new Arc(S5, S7));
+                    graphe.ajouterArc(new Arc(S6, S10));
+                    graphe.ajouterArc(new Arc(S7, S9));
+                    graphe.ajouterArc(new Arc(S8, S10));
+                    graphe.ajouterArc(new Arc(S9, S10));
+
+
+
                     //graphe.ajouterSommet(nouveau = new Sommet("S4"));
                     //graphe.ajouterSommet(nouveau = new Sommet("S5", couleur));
                     //graphe.ajouterSommet(nouveau = new Sommet("S6", couleur));
@@ -95,6 +127,11 @@ public class Main {
                 case 9 :
                     graphe.genereEtTest();
                     break;
+
+                case 10 :
+                    graphe.solveBackTracking();
+                    break;
+
                 default:
                     System.out.println("erreur");
             }

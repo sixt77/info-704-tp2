@@ -43,7 +43,12 @@ public class Graphe {
         if(this.G.size() > 0) {
             System.out.println("liste des sommets : ");
             for(int i=0; i<this.G.size(); i++) {
-                System.out.println(this.G.get(i).nom);
+                if(this.G.get(i).couleur != null){
+                    System.out.println("nom : "+this.G.get(i).nom+" couleur : "+this.G.get(i).couleur);
+                }else{
+                    System.out.println(this.G.get(i).nom);
+                }
+
             }
         }else {
             System.out.println("liste vide");
@@ -158,8 +163,123 @@ public class Graphe {
             }else{
                 System.out.println("Faux");
             }
-
         }
+    }
+
+    public boolean solveBackTracking(){
+        boolean C1, C2, C3, impossible;
+        impossible = false;
+        for(int i = 0; i < this.G.size() ; i++){
+            C1 = true;
+            C2 = true;
+            C3 = true;
+
+            //verification des parents
+            for(int j = 0; j < this.A.size() && !impossible; j++){
+                if(this.A.get(j).S2.equals(this.G.get(i))){
+                    if(this.A.get(j).S1.couleur.equals("1")){
+                        C1 = false;
+                    }
+                    if(this.A.get(j).S1.couleur.equals("2")){
+                        C2 = false;
+                    }
+                    if(this.A.get(j).S1.couleur.equals("3")){
+                        C3 = false;
+                    }
+                }
+            }
+
+            //verification des fils
+            for(int j = 0; j < this.A.size() ; j++){
+                if(this.A.get(j).S1.equals(this.G.get(i))){
+                    if(this.A.get(j).S2.couleur != null){
+                        if(this.A.get(j).S2.couleur.equals("1")){
+                            C1 = false;
+                        }
+                        if(this.A.get(j).S2.couleur.equals("2")){
+                            C2 = false;
+                        }
+                        if(this.A.get(j).S2.couleur.equals("3")){
+                            C3 = false;
+                        }
+                    }
+                }
+            }
+
+            //attribution de la couleurs la plus petite
+
+            if(C1){
+                this.G.get(i).couleur = "1";
+            }else if(C2){
+                this.G.get(i).couleur = "2";
+            }else if(C3){
+                this.G.get(i).couleur = "3";
+            }else{
+                impossible = true;
+            }
+        }
+        if(!impossible){
+            this.afficherListeSommet();
+        }
+        return impossible;
+
+    }
+
+    public static boolean solveBackTracking(Graphe G1){
+        boolean C1, C2, C3, impossible;
+        impossible = false;
+        for(int i = 0; i < G1.G.size() ; i++){
+            C1 = true;
+            C2 = true;
+            C3 = true;
+            //verification des parents
+            for(int j = 0; j < G1.A.size() && !impossible; j++){
+                if(G1.A.get(j).S2.equals(G1.G.get(i))){
+                    if(G1.A.get(j).S1.couleur.equals("1")){
+                        C1 = false;
+                    }
+                    if(G1.A.get(j).S1.couleur.equals("2")){
+                        C2 = false;
+                    }
+                    if(G1.A.get(j).S1.couleur.equals("3")){
+                        C3 = false;
+                    }
+                }
+            }
+
+            //verification des fils
+            for(int j = 0; j < G1.A.size() ; j++){
+                if(G1.A.get(j).S1.equals(G1.G.get(i))){
+                    if(G1.A.get(j).S2.couleur != null){
+                        if(G1.A.get(j).S2.couleur.equals("1")){
+                            C1 = false;
+                        }
+                        if(G1.A.get(j).S2.couleur.equals("2")){
+                            C2 = false;
+                        }
+                        if(G1.A.get(j).S2.couleur.equals("3")){
+                            C3 = false;
+                        }
+                    }
+                }
+            }
+
+            //attribution de la couleurs la plus petite
+
+            if(C1){
+                G1.G.get(i).couleur = "1";
+            }else if(C2){
+                G1.G.get(i).couleur = "2";
+            }else if(C3){
+                G1.G.get(i).couleur = "3";
+            }else{
+                impossible = true;
+            }
+        }
+        if(!impossible){
+            G1.afficherListeSommet();
+        }
+        return impossible;
     }
 
     public static int puissance(int v, int p){

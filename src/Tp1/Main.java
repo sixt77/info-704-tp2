@@ -64,9 +64,16 @@ public class Main {
 
                 case 7:
                     //sommet
-                    graphe.ajouterSommet(nouveau = new Sommet("S1"));
-                    graphe.ajouterSommet(nouveau = new Sommet("S2"));
-                    graphe.ajouterSommet(nouveau = new Sommet("S3"));
+                    Sommet S1 = new Sommet("S1");
+                    Sommet S2 = new Sommet("S2");
+                    Sommet S3 = new Sommet("S3");
+                    //sommet
+                    graphe.ajouterSommet(S1);
+                    graphe.ajouterSommet(S2);
+                    graphe.ajouterSommet(S3);
+                    //arc
+                    graphe.ajouterArc(new Arc(S1, S2));
+                    graphe.ajouterArc(new Arc(S2, S3));
                     //graphe.ajouterSommet(nouveau = new Sommet("S4"));
                     //graphe.ajouterSommet(nouveau = new Sommet("S5", couleur));
                     //graphe.ajouterSommet(nouveau = new Sommet("S6", couleur));

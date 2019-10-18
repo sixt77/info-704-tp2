@@ -124,6 +124,17 @@ public class Graphe {
         }
         return verif;
     }
+
+    public boolean verifierCertificat(Graphe G1){
+        boolean verif = true;
+        for(int i = 0; i < G1.A.size(); i++){
+            if(G1.A.get(i).S1.couleur.equals(G1.A.get(i).S2.couleur)){
+                verif = false;
+            }
+        }
+        return verif;
+    }
+
     public void genereEtTest(){
         int nbPossible = puissance(3, this.G.size());
         ArrayList<Graphe> grapheList = new ArrayList();
@@ -134,18 +145,23 @@ public class Graphe {
                 grapheList.get(i).G.get(j).changerCouleur(Integer.toString((i/(Math.round(puissance(3,this.G.size()-j-1)))%3)+1));
             }
             //dernier sommet
-
             if((i + 1)% 3 == 0){
                 grapheList.get(i).G.get(grapheList.get(i).G.size()-1).changerCouleur(Integer.toString(3));
             }else{
                 grapheList.get(i).G.get(grapheList.get(i).G.size()-1).changerCouleur(Integer.toString((i + 1)%3));
             }
+
+            System.out.println("solution : ");
             afficherListeSommet(grapheList.get(i));
+            if(verifierCertificat(grapheList.get(i))){
+                System.out.println("Correct");
+            }else{
+                System.out.println("Faux");
+            }
+
         }
-
-
-
     }
+
     public static int puissance(int v, int p){
         int initial = v;
         if(p != 0){

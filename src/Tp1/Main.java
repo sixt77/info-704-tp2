@@ -1,5 +1,8 @@
 package Tp1;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -20,6 +23,8 @@ public class Main {
             System.out.println("8- verif");
             System.out.println("9- genere et test");
             System.out.println("10- SBT");
+            System.out.println("11- graphe from file");
+            System.out.println("12- SAT");
             Scanner sc = new Scanner(System.in);
             System.out.println("Veuillez saisir votre choix :");
             int value = sc.nextInt();
@@ -132,13 +137,48 @@ public class Main {
                     graphe.solveBackTracking();
                     break;
 
+                case 11 :
+                    readFile();
+                    break;
+
+                case 12 :
+                    graphe.SATClause();
+                    break;
+
                 default:
                     System.out.println("erreur");
             }
 
         }
-
     }
+    public static void readFile(){
+        BufferedReader objReader = null;
+        try {
+            String strCurrentLine;
+
+            objReader = new BufferedReader(new FileReader("C:\\Users\\sacha\\eclipse-workspace\\S2\\info-604 tp2\\test\\test.txt"));
+
+            while ((strCurrentLine = objReader.readLine()) != null) {
+
+                System.out.println(strCurrentLine);
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        } finally {
+
+            try {
+                if (objReader != null)
+                    objReader.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
 
 
 }
